@@ -1,0 +1,25 @@
+extends ../layout
+
+
+block content
+	div.content.editContent
+		form(action='/login',method='post')
+			ul.login
+				li
+					a.link_blue(href='/register') 注册
+					strong 登录
+				li
+					label 邮箱:
+					input(type='text',class='text_input',name='email')
+					span#tip_name
+					//input(type='hidden',name='referer',value='#{referer}')
+				li
+					label 密码:
+					input(type='password',class='text_input',name='password')
+					span#tip_password
+				li
+					label
+					input(type='submit',value='登录')
+		script
+			Message.init(['#tip_name','#tip_password'])
+			Message.show('login',#{message})
