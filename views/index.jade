@@ -1,0 +1,25 @@
+extends ../layout
+
+block lists
+	div.lists
+		div.addNew
+			a(href='/edit',class='link_blue') 添加新文章
+		each it in arctiles
+			div.item
+				strong.item_title
+					a(href='/content?uid=#{it.key}')= it.title
+				ul.item_type
+					li
+						img(src= it.usericon) 
+						span= it.username
+					li= it.showTime
+				each path in it.pics
+					div.item_pic
+						img(src= path)
+				div(style='max-height:400px;').item_info
+					- var html = it.info
+					| !{html}
+				div.item_handler
+					a(href='/content?uid=#{it.key}') 全文
+				//	a(href='/edit?uid=#{it.key}') edit
+				//	a(href='#',data-uid='#{it.key}',data-action='delete') delete

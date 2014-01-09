@@ -1,0 +1,40 @@
+extends ../layout
+
+block scripts
+	script(src='/js/kindeditor/kindeditor.js')
+
+block content
+	div.content.editContent
+		form(action='/article/update/#{gid}',method='post')
+			div
+				label 标题：
+				input(type='text',name='title',class='article_title',value="#{title}")
+				span#tip_title
+			div
+				label 图片：
+				div#picList.picList
+				dl.uploadBox
+					dt#uploadBox
+					dd
+						div#uploadState.uploadState
+				
+				input(type='hidden',name='pics',id="pics")
+			div
+				label 内容(支持html标签；代码使用pre标签: &lt;pre class="prettyprint"&gt;your code&lt;/pre&gt;)：
+				textarea(name='content',class='edit_area',id='ke_demo')= content
+				span#tip_content
+				script
+					KindEditor.ready(function(K) { K.create('#ke_demo', {uploadJson : '/article/upload'});});		
+	
+			input(type='submit',value='ok')
+			
+		//form(method='post',id='uploadFile',action='/article/upload',target='upload',enctype='multipart/form-data')
+		//	input(type='hidden',name='callback',value='parent.window.uploadFile.success')
+		//	input(type='file',name='files',class='uploadInput',id='fileInput')
+		//div#tip
+		//iframe(id='upload',style="display:none")
+		script.
+			uploadFile.init('#picList','#pics','#uploadState','#uploadBox')
+			Message.init(['tip_title','tip_content'])
+			Message.show('article',#{message})
+			

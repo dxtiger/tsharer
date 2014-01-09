@@ -1,0 +1,54 @@
+!!!5
+html
+	head
+		title= settings.title
+		meta(charset='utf-8')
+		link(href='/css/blog.css',rel='stylesheet',type='text/css')
+		script(src='/js/tools.js')
+		script(src='/js/prettify.js')
+		script(src='/js/kindeditor/kindeditor.js')
+		script(src='/js/blog.js')
+		block scripts
+			
+	body
+		div.header
+			h1 
+		div.nav
+			div.search
+				form(action='/search',method='get')
+					input(type='text',class='search_text',name='q')
+					input(type='submit',value='search',class='search_btn')
+			a(href='/') Home
+		block content
+			div.content
+				block lists
+					//div.lists
+						//block items
+						//block page
+				div.sidebar
+					div.userContent#user
+					//strong(style='color:#f60') 登录功能开发中
+					
+					//div.side_icon
+					//	img(src='/img/icon.jpg')
+					//p.side_discription This blog create by nodejs,javascript,html5,css3
+					
+					//strong.side_title 按日期：
+					//ul.data-list
+					//	each item in settings.other.dataList
+					//		li
+					//			a(href=item.href)= item.text
+					//strong.side_title 按标签：
+					//div.labels
+					//	each item in settings.other.types
+					//		a(href= item)= item
+					//strong.side_title 相关链接：
+					//ul.data-list
+					//	each item in settings.other.links
+					//		li 
+					//			a(href=item.href)= item.text
+					
+		div.footer
+			a(href="/") Home
+			br
+			p create by nodejs redis mysql

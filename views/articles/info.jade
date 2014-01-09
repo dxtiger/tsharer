@@ -1,0 +1,38 @@
+extends ../layout
+
+block lists
+	div.lists
+		div.item
+			strong.item_title  #{title}
+			ul.item_type
+				li 
+					img(src= author.icon) 
+					=author.name
+				li #{date}
+			div.item_info 
+				- var html = pics ? '<img src="'+ pics +'" />' : '';
+				- html += decodeURIComponent(content)
+				| !{html}
+			div.item_handler
+				- var has = power ? '<a href="/article/edit/'+gid+'">edit</a><a href="/article/del/'+ gid +'">del</a>' : ''
+				| !{has}
+		div(id='commentLists').commentLists
+			strong.comment_title 评论
+		
+		script.
+			Comments.init('commentLists','textarea')
+			Comments.get('#{gid}','commentLists')
+		div.comment
+			strong 
+			form( method='get', action='/comment/add',target='commentIframe')
+				div #{na}
+				- var html = na ? na+'<input type="hidden" name ="name",class="comment_input_name" value="'+na+'" />' : '<label>你的名字</label><input type="text" name ="name",class="comment_input_name" />'
+				| !{html}
+				label 说点啥
+				textarea(name='content',class='comment_textarea',id='textarea')
+				input(type='hidden',name='callback',value='parent.window.Comments.add')
+				input(type='hidden',name='gid',value='#{gid}')
+				input(type='submit',class='comment_submit',value='发布')
+		iframe(name='commentIframe',id='commentIframe',style='display:none')
+				
+		

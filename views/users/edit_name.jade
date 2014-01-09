@@ -1,0 +1,27 @@
+extends ../layout
+
+
+block content
+	div.content.editContent
+		form(action='/users/edit/name',method='post')
+			ul.login
+				li
+					strong 信息
+				li
+					label 用户名:
+					input(type='text',class='text_input',name='name',id='username',value="#{name}")
+				li
+					label 邮箱:
+					span #{email}
+				li
+					label 密码:
+					a(href="/users/edit/password") 修改
+				li
+					label 头像:
+					img(src='#{icon}')
+					a(href='/users/edit/icon') 修改
+				li
+					label
+					input(type='submit',value='确定')
+		
+		
