@@ -1,0 +1,44 @@
+extends ../layout
+
+
+block content
+	div.articles
+		div.login
+			form(method='post',action='')
+				div.article_add
+					label 用户中心
+				div.article_add
+					label 用户名:
+					em= #{username}
+				div.article_add
+					label Email:
+					em= #{email}
+				div.article_add
+					label 密码:
+					i 修改密码
+					form(method='post',action='')
+						ul(style='display:none')
+							li
+								label 旧密码
+								input(type='password',name='oldpassword',class='input_short_text')
+								span
+							li
+								label 新密码
+								input(type='password',name='password',class='input_short_text')
+								span
+							li
+								label 确认密码
+								input(type='password',name='repassword',class='input_short_text')
+								span
+							li
+								input(type='submit',value='确认')
+					span
+				div.article_add
+					label 头像:
+					form(action='',method='get')
+						input(type='hidden',name='icon',value='#{icon}')
+						img(src='#{icon}')
+						i 修改头像
+						div flash上传头像
+						div(style='display:none')
+							input(type='submit',value='确定')

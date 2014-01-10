@@ -2,41 +2,34 @@ extends ../layout
 
 
 block content
-	div.content.editContent
-		form(action='/register',method='post',enctype='multipart/form-data',id='register')
-			ul.login
-				li
-					a.link_blue(href='/login') 登录
-					strong 注册
-				li
+	div.articles
+		div.login
+			form(method='post',action='')
+				div.article_add
+					label 注册
+				div.article_add
 					label 用户名:
-					input(type='text',class='text_input',name='name',id='username')
-				li
-					label 邮箱:
-					input(type='text',class='text_input',name='email')
-					span#tip_email
-				li
+					input(type='text',name='username',class='input_short_text')
+					span
+				div.article_add
+					label Email:
+					input(type='text',name='username',class='input_short_text')
+					span
+				div.article_add
 					label 密码:
-					input(type='password',class='text_input',name='password')
-				li
+					input(type='password',name='password',class='input_short_text')
+					span
+				div.article_add
 					label 确认密码:
-					input(type='password',class='text_input',name='repassword')
-					span#tip_password
-				li
+					input(type='password',name='repassword',class='input_short_text')
+					span
+				div.article_add
 					label 头像:
-					div#userIcon
-					div#picList.picList
-					dl.uploadBox
-						dt#uploadBox
-						dd
-							div#uploadState.uploadState
-					input(type='hidden',name='icon',id="pics")
-				li
-					label
-					input(type='submit',value='注册')
-		div#tip
-		script.
-			uploadFile.init('#picList','#pics','#uploadState','#uploadBox',true)
-			Message.init(['#tip_password','#uploadState','#tip','#tip_password'])
-			Message.show('register',#{message})
-				
+					i
+					input(type='hidden',name='icon')
+					flash flash代码处
+					span
+				div.article_add
+					span.article_submit 注册
+					span
+					

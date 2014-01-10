@@ -2,24 +2,20 @@ extends ../layout
 
 
 block content
-	div.content.editContent
-		form(action='/login',method='post')
-			ul.login
-				li
-					a.link_blue(href='/register') 注册
-					strong 登录
-				li
-					label 邮箱:
-					input(type='text',class='text_input',name='email')
-					span#tip_name
-					//input(type='hidden',name='referer',value='#{referer}')
-				li
+	div.articles
+		div.login
+			form(method='post',action='')
+				div.article_add
+					label 登录
+				div.article_add
+					label 用户名:
+					input(type='text',name='username',class='input_short_text')
+					span
+				div.article_add
 					label 密码:
-					input(type='password',class='text_input',name='password')
-					span#tip_password
-				li
-					label
-					input(type='submit',value='登录')
-		script
-			Message.init(['#tip_name','#tip_password'])
-			Message.show('login',#{message})
+					input(type='password',name='password',class='input_short_text')
+					span
+				div.article_add
+					span.article_submit 登录
+					span
+					

@@ -1,0 +1,22 @@
+div.sidebar_title
+	h3 热门文章
+div.sidebar_list
+	each val in #{hotTitles}
+		dl.sidebar_article
+			dt
+				a(href= val.href)
+					img(src= val.src)
+			dd
+				a(href= val.href)= val.text
+
+div.sidebar_title
+	h3 热门评论
+div.sidebar_list
+	each val in #{hotComments}
+		ul.sidebar_comment
+			li
+				a(href= val.authorLink,class='link_user')= val.author + '|' + val.time
+			li
+				p= val.text
+			li 评论于:
+				a(href= val.href)= val.articleTitle

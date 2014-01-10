@@ -1,0 +1,6 @@
+div.focus.clearfix
+	each val,index in #{focus}
+		div(class= index ==0 ? 'focus_first' : '')
+			a(href= val.link)
+				img(src= val.src)
+				em= val.text

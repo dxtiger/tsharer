@@ -1,25 +1,39 @@
-extends ../layout
+extends layout
 
-block lists
-	div.lists
-		div.addNew
-			a(href='/edit',class='link_blue') 添加新文章
-		each it in arctiles
+block focus
+	include focus
+
+block content
+	div.articles
+		h2.articles_title 最新评测
+		
+		each val in #{items}
 			div.item
-				strong.item_title
-					a(href='/content?uid=#{it.key}')= it.title
-				ul.item_type
-					li
-						img(src= it.usericon) 
-						span= it.username
-					li= it.showTime
-				each path in it.pics
+				div.item_user
+					span
+						a(href= val.authorLink ,class='link_user')= val.author + '|' + val.time
+					em
+						a(href= val.href, class='link_grey')= val.columnName
+				div.item_info.clearfix
 					div.item_pic
-						img(src= path)
-				div(style='max-height:400px;').item_info
-					- var html = it.info
-					| !{html}
-				div.item_handler
-					a(href='/content?uid=#{it.key}') 全文
-				//	a(href='/edit?uid=#{it.key}') edit
-				//	a(href='#',data-uid='#{it.key}',data-action='delete') delete
+						a(href= val.articleLink)
+							img(src= val.src)
+					div.item_text
+						em
+							a(href= val.articleLink)
+						p= val.text
+		
+		div.page
+			if #{page} == 0
+				a(href='/#{nextpage}',class='btn_next') 下一页
+			else
+				a(href='/#{prepage}',class='btn_pre') 上一页
+				a(href='/#{nextpage}',class='btn_next') 下一页
+
+
+block aside
+	include aside
+
+		
+block sidebar
+	include sidebar

@@ -1,38 +1,43 @@
 extends ../layout
 
-block lists
-	div.lists
-		div.item
-			strong.item_title  #{title}
-			ul.item_type
-				li 
-					img(src= author.icon) 
-					=author.name
-				li #{date}
-			div.item_info 
-				- var html = pics ? '<img src="'+ pics +'" />' : '';
-				- html += decodeURIComponent(content)
-				| !{html}
-			div.item_handler
-				- var has = power ? '<a href="/article/edit/'+gid+'">edit</a><a href="/article/del/'+ gid +'">del</a>' : ''
-				| !{has}
-		div(id='commentLists').commentLists
-			strong.comment_title 评论
-		
-		script.
-			Comments.init('commentLists','textarea')
-			Comments.get('#{gid}','commentLists')
+
+
+block content
+	div.articles
+		div.article_title
+			h1= #{title}
+			span <a href='#{authorLink}'>#{author}</a> 发表于#{time}
+
+		div.article_content= #{content}
+
+		div.article_share
+			div.icon_share 分享代码，稍后添加
+			span.icon_like +1
+
 		div.comment
-			strong 
-			form( method='get', action='/comment/add',target='commentIframe')
-				div #{na}
-				- var html = na ? na+'<input type="hidden" name ="name",class="comment_input_name" value="'+na+'" />' : '<label>你的名字</label><input type="text" name ="name",class="comment_input_name" />'
-				| !{html}
-				label 说点啥
-				textarea(name='content',class='comment_textarea',id='textarea')
-				input(type='hidden',name='callback',value='parent.window.Comments.add')
-				input(type='hidden',name='gid',value='#{gid}')
-				input(type='submit',class='comment_submit',value='发布')
-		iframe(name='commentIframe',id='commentIframe',style='display:none')
-				
+			h2 参与评论
+			textarea
+			div.comment_submit
+				span 提交评论
+				div <a href="/login">登录</a> 后参与评论
+
+		div.comment_list
+			each val in #{comments}
+				div.comment_item
+					span
+						a(href= val.authorLink)
+							img(src= val.icon)
+					a(href= val.authorLink)= val.author
+					i= val.time
+					p= val.text
+						
+			
+
+
+block aside
+	include ../aside
+
 		
+block sidebar
+	include ../sidebar
+					
