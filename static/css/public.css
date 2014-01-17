@@ -103,6 +103,7 @@ a.link_grey:hover { color:#f60;}
 .item_user em { font-weight:bold;}
 .item_info {}
 .item_pic { width:180px; height:180px; overflow:hidden; float:left;}
+.item_pic img { max-width: 180px; max-height: 180px;}
 .item_text { float:left; padding:0 0 0 20px; width:420px; overflow:hidden;}
 .item_text em { font-size:20px; line-height:32px; }
 .item_text em a:link , .item_text em a:visited { color:#000;}

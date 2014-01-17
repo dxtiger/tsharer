@@ -54,7 +54,7 @@ function add(req,res){
 	
 	// 生成摘要
 	info = content.replace(/<[^>]*>/g,'');
-	info = info.slice(0,30)
+	info = info.slice(0,120)
 	
 	// 生成头图
 	// 生成缩略图

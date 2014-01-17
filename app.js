@@ -5,7 +5,7 @@ var express = require('express'),
 	jade = require('jade'),
 	route = require('./routes'),
 	app = express(),
-	port = 3000,
+	port = 80,
 	RedisStore = require('connect-redis')(express);
 	
 	

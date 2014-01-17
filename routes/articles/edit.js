@@ -90,8 +90,8 @@ function update(req,res){
 		
 		//content = encodeURIComponent(content)
 		
-		var sql = 'update articles set title = "'+ title +'" ,  content = "'+ content +'" , tid = "'+ tid +'"  where gid ="' + gid + '"';
-		
+		var sql = 'update articles set title = "'+ title +'" ,   content = "'+ content +'" , tid = "'+ tid +'"  where gid ="' + gid + '"';
+		console.log(sql)
 		
 		
 		client.query(sql, function(_err){
