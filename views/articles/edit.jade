@@ -1,37 +1,39 @@
 extends ../layout
 
-
+block scripts
+	script(src='/js/kindeditor/kindeditor.js')
 
 block content
 	div.articles
-		form(method='get',action='')
+		form(method='post',action='/article/edit/')
 			div.article_add
 				label 编辑文章
 			div.article_add
 				label 标题:
-				input(type='text',name='title',class='input_text',value='#{title}')
+				input(type='hidden',name='gid',value= gid)
+				input(type='text',name='title',class='input_text',value= title )
 				span
 			div.article_add
 				label 分类:
 				ul.arcticle_types.clearfix
-					- var type_gid = #{type_gid}
-					each val in #{types}
+					each val in settings.types
 						li
-							input(type='radio',name='type',value= val.gid,checked= type_gid == val.gid ? true : false)= val.value
+							input(type='radio',name='type',value= val.tid,checked= tid == val.tid ? true : false)
+							em= val.value
 				span
 			div.article_add
-				textarea(name='content',id='ke_content',value='#{content}')
+				textarea(name='content',id='ke_content')= content
 				span
 				script.
 					KindEditor.ready(function(K) { K.create('#ke_content', {uploadJson : '/article/upload'});});
-				input(type='hidden',name='author',value='#{author}')
+				input(type='submit',value='提交')
 				span.article_submit 提交
 			
 
 
 block aside
-	include ../aside
+	//include ../aside
 
 		
 block sidebar
-	include ../sidebar
+	//include ../sidebar

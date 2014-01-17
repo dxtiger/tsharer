@@ -67,11 +67,13 @@ a.link_grey:hover { color:#f60;}
 .nav_user img { float:left;}
 .nav_user span { display:inline-block; margin:20px 0 0 10px;}
 .nav_user div { }
-.nav_user ul { position:absolute; left:55px; top:55px; background:#fff; padding:10px; border:1px solid #e6eaed; box-shadow: 0 2px 3px rgba(0,0,0,0.2);border-radius: 3px;}
+.nav_user ul { position:absolute; display:none; left:55px; top:55px; background:#fff; padding:10px; border:1px solid #e6eaed; box-shadow: 0 2px 3px rgba(0,0,0,0.2);border-radius: 3px;}
 .nav_user li { padding:5px 10px;}
 .nav_user ul:before {content: "";width: 20px;height: 12px;position: absolute;top: -12px;left: 20%;margin-left: -8px;background-image: url("../img/triangle.png");}
 .nav_user p { padding:13px 0 0;}
 .nav_user p a { display:inline-block; margin:0 10px;}
+
+.nav_user_on ul{ display:block;}
 
 /** container **/
 .container { margin:40px auto 20px;}

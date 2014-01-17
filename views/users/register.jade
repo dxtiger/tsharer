@@ -4,7 +4,7 @@ extends ../layout
 block content
 	div.articles
 		div.login
-			form(method='post',action='')
+			form(method='post',action='/register')
 				div.article_add
 					label 注册
 				div.article_add
@@ -13,7 +13,7 @@ block content
 					span
 				div.article_add
 					label Email:
-					input(type='text',name='username',class='input_short_text')
+					input(type='text',name='email',class='input_short_text')
 					span
 				div.article_add
 					label 密码:
@@ -26,10 +26,10 @@ block content
 				div.article_add
 					label 头像:
 					i
-					input(type='hidden',name='icon')
-					flash flash代码处
+					input(type='file',name='icon')
 					span
 				div.article_add
+					input(type='submit',value='ok')
 					span.article_submit 注册
 					span
 					

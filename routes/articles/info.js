@@ -42,7 +42,7 @@ function get(req,res){
 			}
 			_res[0] = _res[0] || {};
 			result[0].author = {
-				name : _res[0].name,
+				name : _res[0].name || 'tiger',   // tiger 测试用值
 				icon : _res[0].icon
 			}
 			// 判断 当前登录人 是不是 文章作者。 是，具有修改权限 。 不是，不能修改本文章。
@@ -52,6 +52,12 @@ function get(req,res){
 				result[0].power = true;  
 			}
 			
+			result[0].date = require('../time')(result[0].date,1)
+			
+			res.render('articles/info',result[0]);
+			client.end();
+			
+			/*
 			if(uid){
 				// 查询当前登录人名字 。登录后用户，评论框 名字直接显示用户名字
 				client.query('select name from users where uid = "' + uid + '"',function(err,names){
@@ -61,7 +67,7 @@ function get(req,res){
 						client.end();
 						return;
 					}
-					result[0].na = names[0].na || '';
+					result[0].name = names[0] || '';
 					result[0].date = require('../time')(result[0].date);
 					
 					res.render('articles/info',result[0]);
@@ -74,6 +80,7 @@ function get(req,res){
 				res.render('articles/info',result[0]);
 				client.end();
 			}
+			*/
 			
 		})
 		

@@ -5,10 +5,13 @@ extends ../layout
 block content
 	div.articles
 		div.article_title
-			h1= #{title}
-			span <a href='#{authorLink}'>#{author}</a> 发表于#{time}
+			h1= title
+			span #{author.name}  发表于 #{date} 
 
-		div.article_content= #{content}
+		
+		div.article_content
+			-var html = decodeURIComponent(content)
+			| !{html}
 
 		div.article_share
 			div.icon_share 分享代码，稍后添加
@@ -21,23 +24,25 @@ block content
 				span 提交评论
 				div <a href="/login">登录</a> 后参与评论
 
-		div.comment_list
-			each val in #{comments}
-				div.comment_item
-					span
-						a(href= val.authorLink)
-							img(src= val.icon)
-					a(href= val.authorLink)= val.author
-					i= val.time
-					p= val.text
+		div.comment_list#comment_list
+			
+			//each val in #{comments}
+			//	div.comment_item
+			//		span
+			//			a(href= val.authorLink)
+			//				img(src= val.icon)
+			//		a(href= val.authorLink)= val.author
+			//		i= val.time
+			//		p= val.text
+			
 						
 			
 
 
 block aside
-	include ../aside
+	//include ../aside
 
 		
 block sidebar
-	include ../sidebar
+	//include ../sidebar
 					

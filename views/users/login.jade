@@ -4,18 +4,19 @@ extends ../layout
 block content
 	div.articles
 		div.login
-			form(method='post',action='')
+			form(method='post',action='/login')
 				div.article_add
 					label 登录
 				div.article_add
-					label 用户名:
-					input(type='text',name='username',class='input_short_text')
+					label Email:
+					input(type='text',name='email',class='input_short_text')
 					span
 				div.article_add
 					label 密码:
 					input(type='password',name='password',class='input_short_text')
 					span
 				div.article_add
+					input(type='submit',value='ok')
 					span.article_submit 登录
 					span
 					

@@ -22,7 +22,7 @@ function get(req,res){
 // 提交
 function post(req,res){
 	
-	var name = req.body.name,
+	var name = req.body.username,
 		pwd = req.body.password,
 		repwd = req.body.repassword,
 		email = req.body.email,
@@ -39,7 +39,7 @@ function post(req,res){
 	
 	
 	if(!icon){
-		icon =  'http://bcs.duapp.com/babyphotos/icon.jpg'
+		icon =  '/img/icon.jpg'  // 默认头像
 	}
 	
 	pwd = md5(pwd);
@@ -57,19 +57,41 @@ function post(req,res){
 			})
 			return;
 		}
+		
 		register();
+		
+		/*
+		vFn('name',name,function(n){
+			if(n== -1){
+				res.render('users/register',{
+					message : 2 // 出错了，请重新试下
+				})
+				return;
+			}
+			if(n== 1){
+				res.render('users/register',{
+					message : 4 // 用户名已经被注册了。
+				})
+				return;
+			}
+			
+			// name，email,验证通过
+			
+		})
+		*/
+		
 	});
 	
 	function register(){
 		var client = mysql(),
 			query = 'insert into users set uid = ? , name = ? , password = ? , email = ? , date = ? , icon = ? , token = ?',
-			token = md5('asdfasdf' + uid  + Math.round(Math.random()*10000000) ),
+			token = md5(uuid.v1() + uid),
 			ar = [uid,name,pwd,email,date,icon,token];
 			
 		client.query(query,ar,function(err,result){
 			if(err){
 				console.log(err);
-				res.render('/register',{
+				res.render('users/register',{
 					message : 2 // 出错了，请重新试下
 				})
 				return;
@@ -77,10 +99,8 @@ function post(req,res){
 			
 			req.session.uid = uid;
 			res.cookie('token', token, { maxAge : 30*24*60*60*1000 });
-			
-			res.cookie('userinfo',JSON.stringify({name:name,icon:icon}), { maxAge: 30*24*60*60*1000 });
-			
-			res.redirect('/'); 
+			res.cookie('userinfo',JSON.stringify({name:name,icon:icon}), { maxAge: 365*24*60*60*1000 });
+			res.redirect('/');
 			
 		})
 	}

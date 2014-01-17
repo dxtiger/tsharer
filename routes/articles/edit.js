@@ -16,6 +16,8 @@ function get(req,res){
 		uid = req.session.uid,
 		client = mysql();
 	
+	
+	
 	client.query('select * from articles where gid = "' + gid + '"',function(err,result){
 		if(err){
 			res.send(404,err);
@@ -33,15 +35,9 @@ function get(req,res){
 			client.end();
 			return;
 		}
-		/**
-		 *
-		 *   图片数据展示：等待前台处理。 
-		 * 
-		 * 
-		 *  **/
-		result[0].pics = result[0].pics == 'null' ? '' : result[0].pics;
-		result[0].message = 'null';
-		result[0].content = decodeURIComponent(result[0].content);
+		
+		
+		
 		res.render('articles/edit',result[0]);
 		client.end();
 	})
@@ -51,10 +47,10 @@ function get(req,res){
 
 
 function update(req,res){
-	var gid = req.params.gid,
+	var gid = req.body.gid,
 		title = req.body.title,
 		uid = req.session.uid,
-		pics = req.body.pics,
+		tid = req.body.type,
 		content = req.body.content,
 		client = mysql();
 		
@@ -74,7 +70,7 @@ function update(req,res){
 		return;
 	}
 	
-	client.query('select uid from articles where gid = "' + gid + '"' ,function(err,result){
+	client.query('select * from articles where gid = "' + gid + '"' ,function(err,result){
 		if(err){
 			console.log(err);
 			res.send(404,'服务器出了点小问题，一会儿再试下吧');
@@ -92,11 +88,11 @@ function update(req,res){
 		// 过滤html标签,保留p，pre标签
 		//content = content.replace(/<[^(>|p|pre)]*>/g,'');
 		
-		content = encodeURIComponent(content)
+		//content = encodeURIComponent(content)
 		
-		var sql = 'update articles set title = "'+ title +'" ,  content = "'+ content +'" , pics = "'+ pics +'"  where gid ="' + gid + '"';
+		var sql = 'update articles set title = "'+ title +'" ,  content = "'+ content +'" , tid = "'+ tid +'"  where gid ="' + gid + '"';
 		
-		console.log(sql)
+		
 		
 		client.query(sql, function(_err){
 			if(_err){
@@ -105,7 +101,7 @@ function update(req,res){
 				return;
 			}
 			
-			res.redirect('/article');
+			res.redirect('/article/list/' + tid + '/' + gid);
 			client.end();
 		})
 	})

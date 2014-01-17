@@ -36,7 +36,7 @@ function post(req,res){
 		}
 		if(result[0].password != password ){
 			res.render('users/login',{
-				message : 1
+				message : 1 // 密码不正确
 			})
 			return;
 		}
@@ -44,13 +44,13 @@ function post(req,res){
 		// 写入session，cookie 
 		
 		req.session.uid = result[0].uid;
-		res.cookie('token', result[0].token, { maxAge : 30*24*60*60*1000 });
+		res.cookie('token', result[0].token, { maxAge : 365*24*60*60*1000 });
 		var cookie = {
 			name : result[0].name,
 			icon : result[0].icon
 		};
 		cookie = JSON.stringify(cookie);
-		res.cookie('userinfo',cookie, { maxAge: 30*24*60*60*1000 });
+		res.cookie('userinfo',cookie, { maxAge: 365*24*60*60*1000 });
 		
 		res.redirect('/');
 	})

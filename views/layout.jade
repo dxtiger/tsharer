@@ -7,6 +7,8 @@ html
 		meta(name='keywords' content='Tsharer,同享网，装修评测，家具评测，建材评测，装修设计评测，装修施工评测')
 		link(href='/css/public.css',rel='stylesheet',type='text/css')
 		script(src='/js/tools.js')
+		script.
+			Y.add('blog',{path : '/js/blog.js'})
 		block scripts
 			
 	body
@@ -16,13 +18,13 @@ html
 				a(href="/") logo
 			ul.nav
 				li
-					a(href='/pingce') 体验评测
+					a(href='/pingce') menu
 				li
-					a(href='/t') T推荐
+					a(href='/t') menu
 				li
-					a(href='/show') 特色SHOW
+					a(href='/show') menu
 				li
-					a(href='/ask') 求评测
+					a(href='/ask') menu
 			div.nav_user#nav_user
 			
 			div.nav_search
@@ -49,6 +51,6 @@ html
 					a(href='/about.html') 求评测
 					a(href='/about.html') 意见反馈
 					a(href='/about.html') 加入我们
-				p!= 地址：北京市朝阳区光华路9号3号楼时尚大厦9层<br/>邮编：100020<br/>总机：(8610)65873333<br/>
-				p!= 京ICP证070512号<br/>北京市公安局朝阳分局备案编号：1101050667<br/>Copyright © 2014 Yoka.com, All rights reserved.YOKA时尚网 版权所有
+				p 地址：北京市朝阳区光华路9号3号楼时尚大厦9层<br/>邮编：100020<br/>总机：(8610)65873333<br/>
+				p 京ICP证070512号<br/>北京市公安局朝阳分局备案编号：1101050667<br/>Copyright © 2014 Yoka.com, All rights reserved.YOKA时尚网 版权所有
 					

@@ -12,16 +12,13 @@ var authentication = require('./routes/users/authentication'),
 		info : require('./routes/articles/info'),
 		del : require('./routes/articles/del'),
 		upload : require('./routes/articles/upload')
-	},
-	comment = {
-		list : require('./routes/comments/list'),
-		add : require('./routes/comments/add'),
-		del : require('./routes/comments/del'),
-		edit : require('./routes/comments/edit')
-	},
-	upload = require('./routes/test/request'),
-	read = require('./routes/test/write'),
-	oss = require('./routes/test/oss');
+	};
+	//comment = {
+	//	list : require('./routes/comments/list'),
+	//	add : require('./routes/comments/add'),
+	//	del : require('./routes/comments/del'),
+	//	edit : require('./routes/comments/edit')
+	//};
 	
 
 module.exports = function(app){
@@ -29,6 +26,7 @@ module.exports = function(app){
 	// authentication
 	// 路径中包含 /edit , /add , /del 的请求，先验证
 	app.all(/edit|add|del|upload/,function(req,res,next){
+		
 		if(req.path == '/comment/add'){
 			next();
 			return;
@@ -36,10 +34,7 @@ module.exports = function(app){
 		authentication(req,res,next);
 	})
 	
-	app.get('/read',read);
 	
-	app.get('/oss',oss.get);
-	app.post('/oss',oss.post);
 	
 	//app.get('/bbs',bbs);
 	
@@ -53,40 +48,41 @@ module.exports = function(app){
 	// /article?start=100&type=时尚
 	// /article?start=100&user=tiger
 	// /article/add
-	// /article/edit/gid
+	// /article/edit/gid          
 	app.get('/article',article.list);
 	app.get('/article/',article.list);
-	
-	app.get('/article/info/:gid',article.info);
 	
 	app.get('/article/add',article.add.get);
 	app.post('/article/add',article.add.add);
 	
 	app.get('/article/edit/:gid',article.edit.get);
-	app.post('/article/update/:gid',article.edit.update);
+	app.post('/article/edit/',article.edit.update);
 	
 	app.get('/article/del/:gid',article.del);
 	
 	app.post('/article/upload',article.upload);
 	
+	app.get('/article/list/:tid/',article.list); // tid  type的id
+	app.get('/article/list/:tid/:gid',article.info); // cid  文章的id
+	
 	
 	
 	// 评论   仅提供 ajax接口
-	app.get('/comment/add',comment.add);
-	app.get('/comment/del',comment.del);
-	app.get('/comment/edit',comment.edit);
-	app.get('/comment/list',comment.list);
+	//app.get('/comment/add',comment.add);
+	//app.get('/comment/del',comment.del);
+	//app.get('/comment/edit',comment.edit);
+	//app.get('/comment/list',comment.list);
 	
 	
 	
 	// 修改用户信息
 	//app.param( 'type' , /\w+/ );
-	app.get('/users/edit',user.edit.get);
-	app.get('/users/edit/:type',user.edit.get);
+	//app.get('/users/edit',user.edit.get);
+	//app.get('/users/edit/:type',user.edit.get);
 	
-	app.post('/users/edit/name',user.edit.name);
-	app.post('/users/edit/password',user.edit.pwd);
-	app.post('/users/edit/icon',user.edit.icon);
+	//app.post('/users/edit/name',user.edit.name);
+	//app.post('/users/edit/password',user.edit.pwd);
+	//app.post('/users/edit/icon',user.edit.icon);
 	
 	
 	
@@ -106,7 +102,7 @@ module.exports = function(app){
 	
 	// 获取上传的文件地址。post，get，put，delete地址。
 	// 用于上传图片，头像    
-	app.get('/geturl',upload)
+	//app.get('/geturl',upload)
 	
 	
 	

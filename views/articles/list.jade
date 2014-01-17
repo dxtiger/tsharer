@@ -4,30 +4,28 @@ extends ../layout
 
 block content
 	div.articles
-		h2.articles_title= #{columnName}
+		h2.articles_title= columnName
 		
-		each val in #{items}
+		each val in articles
 			div.item
 				div.item_user
-					span
-						a(href= val.authorLink ,class='link_user')= val.author + '|' + val.time
+					span= val.author.name + ' | ' + val.date
+						//a(href= val.authorLink ,class='link_user')= val.author + '|' + val.time
 					em
-						a(href= val.href, class='link_grey')= val.columnName
+						- var types = settings.types[val.tid];
+						a(href= '/article/' + val.tid, class='link_grey')= types.value
 				div.item_info.clearfix
 					div.item_pic
-						a(href= val.articleLink)
-							img(src= val.src)
+						a(href= '/article/list/' + val.tid + '/' + val.gid)
+							img(src= val.pic)
 					div.item_text
 						em
-							a(href= val.articleLink)
-						p= val.text
+							a(href= '/article/list/' + val.tid + '/' + val.gid)= val.title
+						p= val.info
 		
 		div.page
-			if #{page} == 0
-				a(href='/#{nextpage}',class='btn_next') 下一页
-			else
-				a(href='/#{prepage}',class='btn_pre') 上一页
-				a(href='/#{nextpage}',class='btn_next') 下一页
+			a(href='/#{prepage}',class='btn_pre') 上一页
+			a(href='/#{nextpage}',class='btn_next') 下一页
 
 
 block aside
@@ -35,4 +33,4 @@ block aside
 
 		
 block sidebar
-	include ../sidebar
+	//include ../sidebar

@@ -1,5 +1,6 @@
 var mysql = require('../mysql'),
 	crypto = require('crypto'),
+	gm = require('gm'),
 	uuid = require('uuid');
 
 
@@ -24,8 +25,10 @@ function add(req,res){
 		gid = uuid.v1(),
 		uid = req.session.uid,
 		title = req.body.title,
-		pics = req.body.pics,
 		content = req.body.content,
+		tid = req.body.type,
+		pic,
+		info,
 		client = mysql();
 	
 	// 过滤html标签,保留p，pre标签
@@ -48,17 +51,38 @@ function add(req,res){
 		client.end();
 		return;
 	}
-
-	client.query('insert into articles set gid = ? , title = ? , uid = ? ,  date = ? , content = ? , pics = ? ' , [gid,title,uid,date,content, pics],function(err){
-		if(err){
-			console.log(err);
-			res.send(404,'服务器出了点小问题，一会儿再试下吧');
+	
+	// 生成摘要
+	info = content.replace(/<[^>]*>/g,'');
+	info = info.slice(0,30)
+	
+	// 生成头图
+	// 生成缩略图
+	
+	pic = content.match(/src=('|")([^'"]*)('|")/);
+	pic = pic ?  pic[2] :  '';
+	
+	gm(pic).resize(180,180)
+	
+	
+	function into(){
+		
+		client.query('insert into articles set gid = ? , title = ? , uid = ? ,  date = ? , content = ? , tid = ? , info = ? , pic = ?' , [gid,title,uid,date,content, tid,info,pic],function(err){
+			if(err){
+				console.log(err);
+				res.send(404,'服务器出了点小问题，一会儿再试下吧');
+				client.end();
+				return;
+			}
+			res.redirect('/article');
 			client.end();
-			return;
-		}
-		res.redirect('/article');
-		client.end();
-	})
+		})
+	}
+	
+	
+	into()
+	
+	
 }
 
 
